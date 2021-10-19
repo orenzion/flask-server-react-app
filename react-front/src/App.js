@@ -4,6 +4,7 @@ import NavbarComponent from './Components/NavbarComponent';
 import Home from './Components/Home'
 import About from './Components/About'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Iris from './Components/Iris';
 
 
 function App() {
@@ -16,8 +17,11 @@ function App() {
             <Route exact path="/">
               <Home/>
             </Route>
-            <Route exact path="/About">
+            <Route exact path="/about">
               <About/>
+            </Route>
+            <Route exact path="/iris">
+              <Iris/>
             </Route>
           </Switch>
         </div>
