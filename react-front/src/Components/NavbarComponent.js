@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 
 
-export default class NavbarComponent extends Component {
-    render() {
-        return (
-            <div>
-                <Navbar bg="dark" variant={"dark"} expand="lg">
+function NavbarComponent() {
+    return (
+        <div>
+            <Navbar bg="dark" variant={"dark"} expand="lg">
                 <Container>
                     <Navbar.Brand href="/">Oren Zion</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -23,8 +22,13 @@ export default class NavbarComponent extends Component {
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
-                </Navbar>
-            </div>
-        )
-    }
+            </Navbar>
+        </div>
+    )
 }
+
+export default NavbarComponent
+
+
+
+

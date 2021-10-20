@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Iris extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Iris</h1>
-            </div>
-        )
-    }
+function Iris() {
+    return (
+        <div>
+            <h1>Iris</h1>
+        </div>
+    )
 }
+
+export default Iris
+
