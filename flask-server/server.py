@@ -1,31 +1,25 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Api, Resource
 import numpy as np
 import joblib
 
 
 app = Flask(__name__)
-api = Api(app)
 
 
-class PredictIris(Resource):
-    def get(self, sepal_length, sepal_width, petal_length, petal_width):
+@app.route('/api/iris-predict', methods=['POST'])
+def PredictIris():
 
-        sample_data = [sepal_length, sepal_width, petal_length, petal_width]
-        '''
-        clean_data = [float(i) for i in sample_data]
+    if request.method == 'POST':
+        print(request.json)
+        sepal_length = request.json['sepal_length']
+        sepal_width = request.json['sepal_width']
+        petal_length = request.json['petal_length']
+        petal_width = request.json['petal_width']
 
-        ex1 = np.array(clean_data).reshape(1, -1)
+        print(sepal_length, sepal_width, petal_length, petal_width)
 
-        logit_model = joblib.load('ml-models/logit_iris.pkl')
-        result_prediction = logit_model.predict(ex1)
-        '''
-
-        return {"data": sample_data}
-
-
-api.add_resource(
-    PredictIris, "/api/predict-iris/<float:sepal_length>/<float:sepal_width>/<float:petal_length>/<float:petal_width>")
+        return {"data": "data"}
 
 
 if __name__ == "__main__":
