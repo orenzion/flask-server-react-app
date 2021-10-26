@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 function IrisForm() {
   const [validated, setValidated] = useState(false);
@@ -10,6 +11,7 @@ function IrisForm() {
   const [petal_length, set_petal_length] = useState("");
   const [petal_width, set_petal_width] = useState("");
 
+  // function to handle form submit
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -24,13 +26,13 @@ function IrisForm() {
         petal_width: petal_width,
       };
       // send post request to the python api to predict the iris flower type
-      fetch("/api/iris-predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }).then(() => {
-        console.log("returned from server");
-      });
+      // using async and await function
+      async function fetchData() {
+        const request = await axios.post("api/iris-predict", data);
+        console.log(request.data);
+        // alert("stop");
+      }
+      fetchData();
     }
 
     setValidated(true);
@@ -81,6 +83,7 @@ function IrisForm() {
       <Button variant="primary" type="submit">
         Predict
       </Button>
+      <p>result = {}</p>
     </Form>
   );
 }
