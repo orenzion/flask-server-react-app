@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-function IrisForm() {
+function IrisForm({ setPredictedIris }) {
   const [validated, setValidated] = useState(false);
-
-  const [predicted, setPredicted] = useState("");
 
   // set an initial value to the form attributes so that we can use them to send data later on to the server
   const [sepal_length, set_sepal_length] = useState("");
@@ -19,6 +17,7 @@ function IrisForm() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       // create the data object from the info entered in the form
       const data = {
@@ -31,15 +30,18 @@ function IrisForm() {
       // using async and await function
       async function fetchData() {
         const request = await axios.post("api/iris-predict", data);
-        console.log(request.data);
-
-        setPredicted(request.data["res"]);
-        alert("stop");
+        setPredictedIris(request.data["res"]);
       }
       fetchData();
+      // prevent form from re-rendering
+      event.preventDefault();
+      // reset form fields and validation marks
+      set_sepal_length("");
+      set_sepal_width("");
+      set_petal_length("");
+      set_petal_width("");
+      setValidated(false);
     }
-
-    setValidated(true);
   };
 
   return (
@@ -87,7 +89,6 @@ function IrisForm() {
       <Button variant="primary" type="submit">
         Predict
       </Button>
-      <p>result = {predicted}</p>
     </Form>
   );
 }
